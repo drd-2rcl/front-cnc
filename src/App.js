@@ -8,10 +8,14 @@ import logo from './assets/logo.svg';
 function App() {
   const [email, setEmail ] = useState('');
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(email);
+    const response = await api.post('/sessions', { email });
+
+    const { _id } = response.data;
+
+    localStorage.setItem('user', _id);
   }
 
   return (
